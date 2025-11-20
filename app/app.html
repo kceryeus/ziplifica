@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#00f6ff">
+  <link rel="manifest" href="../manifest.json">
+  <title>Ziplifica · App</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="app-header__content">
+      <a href="../index.html" class="logo">
+        <img src="../logo-white.png" alt="Logótipo Ziplifica">
+        <span>Ziplifica</span>
+      </a>
+      <p>Organização local. Sem uploads.</p>
+    </div>
+    <div class="app-header__actions">
+      <a class="btn btn--ghost" href="developer.html">Modo developer</a>
+      <button id="clearBtn" class="btn btn--ghost" type="button">Limpar lista</button>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <section class="drop-panel" id="dropzone" tabindex="0">
+      <div class="drop-panel__icon">⇪</div>
+      <h1>Arraste & solte ficheiros</h1>
+      <p>Ou clique para selecionar. Analisamos localmente e criamos um ZIP organizado.</p>
+      <div class="drop-panel__actions">
+        <button type="button" class="btn btn--primary" id="selectFilesBtn">Selecionar ficheiros</button>
+        <button type="button" class="btn btn--ghost" id="selectFolderBtn">Selecionar pastas</button>
+      </div>
+      <input id="fileInput" type="file" multiple aria-label="Selecionar ficheiros" hidden />
+      <input id="folderInput" type="file" multiple webkitdirectory directory aria-label="Selecionar pastas" hidden />
+    </section>
+
+    <section class="info-grid">
+      <article class="card">
+        <p class="label">Ficheiros detetados</p>
+        <h2 id="fileCount">0</h2>
+      </article>
+      <article class="card">
+        <p class="label">Categorias</p>
+        <h2 id="folderCount">0</h2>
+      </article>
+      <article class="card">
+        <p class="label">Estado</p>
+        <h2 id="status">Aguardando</h2>
+      </article>
+    </section>
+
+    <section class="options-panel" aria-labelledby="organize-label">
+      <div>
+        <p class="label" id="organize-label">Modo de organização</p>
+        <h3>Escolha como montar o ZIP</h3>
+        <p class="options-panel__hint">Pode alternar a qualquer momento, nada é enviado para servidores.</p>
+      </div>
+      <label class="select-wrapper">
+        <span class="sr-only">Selecione o modo</span>
+        <select id="organizeMode">
+          <option value="type" selected>Por tipo (padrão)</option>
+          <option value="year">Por ano</option>
+          <option value="month">Por mês</option>
+          <option value="year-month">Por ano e mês</option>
+          <option value="year-type">Por ano e tipo</option>
+          <option value="size">Por tamanho</option>
+        </select>
+      </label>
+    </section>
+
+    <section class="options-panel">
+      <div>
+        <p class="label">Opções adicionais</p>
+        <h3>Personalizar organização</h3>
+        <p class="options-panel__hint">Renomear ficheiros e ajustar detalhes avançados.</p>
+      </div>
+      <button type="button" class="btn btn--ghost" id="advancedOptionsBtn" aria-expanded="false">
+        <span>Opções avançadas</span>
+        <span class="toggle-icon">▼</span>
+      </button>
+    </section>
+
+    <section class="options-panel options-panel--advanced" id="advancedOptionsPanel" aria-hidden="true">
+      <div>
+        <p class="label">Renomeação de ficheiros</p>
+        <h3>Padronizar nomes automaticamente</h3>
+        <p class="options-panel__hint">Aplica-se antes da organização. Use a data de modificação do ficheiro.</p>
+      </div>
+      <div class="rename-controls">
+        <label class="select-wrapper">
+          <span class="select-label">Adicionar data</span>
+          <select id="renameDateMode">
+            <option value="none" selected>Sem data</option>
+            <option value="prefix-iso-underscore">AAAAMMDD_ (prefixo com underscore)</option>
+            <option value="prefix-iso-space">AAAAMMDD  (prefixo com espaço)</option>
+            <option value="prefix-eu-underscore">DDMMAAAA_ (prefixo com underscore)</option>
+            <option value="prefix-eu-space">DDMMAAAA  (prefixo com espaço)</option>
+            <option value="prefix-time-underscore">AAAAMMDD_HHMMSS_ (prefixo com hora e underscore)</option>
+            <option value="prefix-time-space">AAAAMMDD_HHMMSS  (prefixo com hora e espaço)</option>
+            <option value="suffix-iso">_AAAAMMDD (sufixo)</option>
+            <option value="suffix-eu">_DDMMAAAA (sufixo)</option>
+            <option value="suffix-time">_AAAAMMDD_HHMMSS (sufixo com hora)</option>
+            <option value="only">AAAAMMDD (só data)</option>
+          </select>
+        </label>
+        <label class="select-wrapper">
+          <span class="select-label">Manipular caracteres</span>
+          <select id="renameCharMode">
+            <option value="none" selected>Sem alteração</option>
+            <option value="normalize">Normalizar (remover espaços e caracteres especiais)</option>
+            <option value="remove-underscore">Remover underscore</option>
+            <option value="remove-underscore-hyphen">Remover underscore e hífen</option>
+            <option value="spaces-to-underscore">Substituir espaços por underscore</option>
+            <option value="spaces-hyphens-to-underscore">Substituir espaços e hífens por underscore</option>
+            <option value="hyphens-to-underscore">Substituir hífens por underscore</option>
+            <option value="underscores-to-spaces">Substituir underscores por espaços</option>
+            <option value="remove-spaces">Remover espaços</option>
+            <option value="remove-hyphens">Remover hífens</option>
+          </select>
+        </label>
+      </div>
+      
+      <div class="custom-rules-section">
+        <div>
+          <p class="label">Regras personalizadas</p>
+          <h4>Mapear extensões para pastas</h4>
+          <p class="options-panel__hint">Exemplo: .psd → DESIGN, .ai → DESIGN</p>
+        </div>
+        <div class="custom-rules-controls">
+          <div class="rule-input-group">
+            <input type="text" id="ruleExtension" placeholder=".ext" pattern="^\.[a-z0-9]+$" />
+            <span>→</span>
+            <input type="text" id="ruleFolder" placeholder="NOME_PASTA" />
+            <button type="button" class="btn btn--primary" id="addRuleBtn">Adicionar</button>
+          </div>
+          <ul id="customRulesList" class="custom-rules-list"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="list-panel">
+      <header>
+        <div>
+          <p class="label">Ficheiros carregados</p>
+          <h3>Lista detalhada</h3>
+        </div>
+        <button class="btn btn--primary" id="downloadBtn" type="button" disabled>Descarregar ZIP</button>
+      </header>
+      <ul id="fileList" aria-live="polite">
+        <li class="placeholder">Ainda sem ficheiros. Arraste-os para começar.</li>
+      </ul>
+    </section>
+  </main>
+
+  <template id="fileRow">
+    <li class="file-item">
+      <div class="file-item__ext"></div>
+      <div class="file-item__info">
+        <strong class="file-item__name"></strong>
+        <small class="file-item__meta"></small>
+      </div>
+      <span class="file-item__category"></span>
+    </li>
+  </template>
+
+  <div class="loading-overlay" id="loadingOverlay" aria-live="polite" aria-hidden="true">
+    <div class="loading-card">
+      <div class="spinner" aria-hidden="true"></div>
+      <p id="loadingMessage">A preparar...</p>
+      <strong id="loadingCount">0</strong>
+      <small>itens processados</small>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

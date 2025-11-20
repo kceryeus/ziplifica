@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#00f6ff">
+  <link rel="manifest" href="../manifest.json">
+  <title>Ziplifica · Modo Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="app-header__content">
+      <a href="../index.html" class="logo">
+        <img src="../logo-white.png" alt="Logótipo Ziplifica">
+        <span>Ziplifica</span>
+      </a>
+      <p>Modo developer · Arquitectura assistida totalmente local.</p>
+    </div>
+    <div class="app-header__actions">
+      <a class="btn btn--ghost" href="../index.html">Landing</a>
+      <a class="btn btn--ghost" href="app.html">App principal</a>
+    </div>
+  </header>
+
+  <main class="app-shell developer-shell">
+    <section class="drop-panel" id="devDropzone" tabindex="0">
+      <div class="drop-panel__icon">⌁</div>
+      <h1>Modo developer</h1>
+      <p>Arraste o seu projecto front-end para detectar linguagens, frameworks e receber sugestões de pastas — tudo no browser.</p>
+      <div class="drop-panel__actions">
+        <button type="button" class="btn btn--primary" id="devSelectFilesBtn">Selecionar ficheiros</button>
+        <button type="button" class="btn btn--ghost" id="devSelectFolderBtn">Selecionar pastas</button>
+      </div>
+      <input id="devFileInput" type="file" multiple aria-label="Selecionar ficheiros" hidden>
+      <input id="devFolderInput" type="file" webkitdirectory directory multiple aria-label="Selecionar pastas" hidden>
+    </section>
+
+    <section class="info-grid developer-stats">
+      <article class="card">
+        <p class="label">Ficheiros</p>
+        <h2 id="devFileCount">0</h2>
+        <p class="card__hint">Detectados nesta sessão</p>
+      </article>
+      <article class="card">
+        <p class="label">Tamanho</p>
+        <h2 id="devSize">0 B</h2>
+        <p class="card__hint">Processado localmente</p>
+      </article>
+      <article class="card">
+        <p class="label">Predomínio</p>
+        <h2 id="devMainLanguage">—</h2>
+        <p class="card__hint" id="dominantBadge">Aguardando ficheiros</p>
+      </article>
+      <article class="card">
+        <p class="label">Frameworks</p>
+        <h2 id="devFrameworkShort">—</h2>
+        <p class="card__hint">Deteção heurística</p>
+      </article>
+    </section>
+
+    <section class="insights-panel">
+      <div>
+        <p class="label">Insights</p>
+        <h3>Panorama do projecto</h3>
+        <p class="options-panel__hint" id="analysisSummary">
+          Ainda sem dados. Arraste ficheiros para gerar recomendações instantâneas.
+        </p>
+      </div>
+      <div class="insights-lists">
+        <div>
+          <strong>Linguagens principais</strong>
+          <ul id="languageList" class="insights-list">
+            <li>—</li>
+          </ul>
+        </div>
+        <div>
+          <strong>Frameworks & tooling</strong>
+          <ul id="frameworksList" class="insights-list">
+            <li>—</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="blueprint-section">
+      <div class="blueprint-header">
+        <div>
+          <p class="label">Blueprints</p>
+          <h3>Sugerimos estas arquitecturas</h3>
+          <p class="options-panel__hint">Perfeito para developers sem frameworks pesados ou com setups híbridos.</p>
+        </div>
+        <span class="suggestion-pill" id="suggestionPill">Ainda sem sugestão</span>
+      </div>
+      <div class="blueprint-grid" id="blueprintList" aria-live="polite"></div>
+    </section>
+
+    <section class="structure-preview" id="structurePreview" aria-hidden="true">
+      <header>
+        <div>
+          <p class="label">Pré-visualização</p>
+          <h3 id="previewTitle">Seleccione um blueprint</h3>
+          <p class="options-panel__hint" id="previewSummary">Mostramos a árvore recomendada e o motivo.</p>
+        </div>
+        <button class="btn btn--primary" id="downloadBlueprintBtn" type="button" disabled>Gerar ZIP com blueprint</button>
+      </header>
+      <div id="treeContainer" class="tree-container">
+        <p class="placeholder">Assim que escolher um blueprint mostramos a estrutura completa.</p>
+      </div>
+    </section>
+
+    <section class="list-panel" id="mappingPanel" aria-live="polite">
+      <header>
+        <div>
+          <p class="label">Mapeamento sugerido</p>
+          <h3>Distribuição por pastas</h3>
+        </div>
+      </header>
+      <ul id="mappingList">
+        <li class="placeholder">Seleccione um blueprint para ver como os ficheiros serão organizados.</li>
+      </ul>
+    </section>
+  </main>
+
+  <div class="loading-overlay" id="loadingOverlay" aria-live="polite" aria-hidden="true">
+    <div class="loading-card">
+      <div class="spinner" aria-hidden="true"></div>
+      <p id="loadingMessage">A preparar...</p>
+      <strong id="loadingCount">0</strong>
+      <small>itens analisados</small>
+    </div>
+  </div>
+
+  <script type="module" src="developer.js"></script>
+</body>
+</html>
+

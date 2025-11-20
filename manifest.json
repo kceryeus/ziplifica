@@ -1,0 +1,19 @@
+{
+  "name": "Ziplifica",
+  "short_name": "Ziplifica",
+  "description": "Organize ficheiros no browser com privacidade total",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#03060f",
+  "theme_color": "#00f6ff",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "logo-white.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
+

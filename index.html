@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#00f6ff">
+  <link rel="manifest" href="manifest.json">
+  <title>Ziplifica · Privacidade e organização instantânea</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <header class="hero" id="topo">
+    <nav class="nav">
+      <a class="logo" href="#topo">
+        <img src="logo-white.png" alt="Logótipo Ziplifica">
+        <span>Ziplifica</span>
+      </a>
+      <a class="nav__cta" href="#cta">Experimentar</a>
+    </nav>
+
+    <div class="hero__content">
+      <div class="hero__text">
+        <p class="eyebrow">100% local · Zero uploads</p>
+        <h1>Ziplifica ficheiros no browser com um clique.</h1>
+        <p class="lead">
+          Arraste, deixe o Ziplifica detectar tipos, criar pastas virtuais
+          e gerar um ZIP impecável — tudo no seu dispositivo, preservando a privacidade.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="app/app.html">Abrir app</a>
+          <a class="btn btn--ghost" href="#como-funciona">Ver como funciona</a>
+          <a class="btn btn--ghost" href="app/developer.html">Modo developer</a>
+        </div>
+        <div class="hero__stats">
+          <div>
+            <strong>0 uploads</strong>
+            <span>Privacidade total</span>
+          </div>
+          <div>
+            <strong>5s</strong>
+            <span>Média para organizar</span>
+          </div>
+          <div>
+            <strong>∞</strong>
+            <span>Tipos suportados</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero__card">
+        <div class="glass">
+          <p class="glass__title">Pré-visualização</p>
+          <ul class="glass__list">
+            <li><span>📁</span><div>IMAGES</div><div>.png, .jpg, .svg</div></li>
+            <li><span>📄</span><div>DOCS</div><div>.pdf, .docx, .txt</div></li>
+            <li><span>🎧</span><div>AUDIO</div><div>.mp3, .wav</div></li>
+            <li><span>🎬</span><div>VIDEO</div><div>.mp4, .mov</div></li>
+          </ul>
+          <p class="glass__footer">ZIP pronto em segundos</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="como-funciona">
+      <div class="section__header">
+        <p class="eyebrow">Workflow</p>
+        <h2>Como funciona</h2>
+        <p>Simples, transparente e totalmente local.</p>
+      </div>
+      <div class="steps">
+        <article>
+          <span>01</span>
+          <h3>Arraste ficheiros</h3>
+          <p>Largue qualquer mistura de ficheiros. Todo o processamento ocorre no seu browser.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>Classificação inteligente</h3>
+          <p>Detectamos automaticamente tipos e organizamos em pastas virtuais por categoria.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>ZIP seguro</h3>
+          <p>Geramos o ZIP localmente para descarregamento imediato. Nada sai do seu dispositivo.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section--grid">
+      <div>
+        <p class="eyebrow">Privacidade by design</p>
+        <h2>Sem servidores, sem assinaturas, sem fricção.</h2>
+        <p>Ziplifica reside totalmente no front-end. Configure regras personalizadas, visualize ficheiros inline e use offline.</p>
+      </div>
+      <div class="card">
+        <h3>Funcionalidades</h3>
+        <ul>
+          <li>✓ Regras personalizadas por extensão</li>
+          <li>✓ Pré-visualização inline</li>
+          <li>✓ Dark/light automático</li>
+          <li>✓ Suporte PWA para uso offline</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section cta" id="cta">
+      <h2>Pronto para organizar?</h2>
+      <p>Experimente já, é grátis e executa diretamente no seu browser.</p>
+      <a class="btn btn--primary" href="app/app.html">Abrir Ziplifica</a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Ziplifica · Construído para privacidade e simplicidade.</p>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js").catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>
+

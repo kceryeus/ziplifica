@@ -1,0 +1,52 @@
+# Regras do Projecto Ziplifica
+
+## Idioma e Localização
+- **Português de Portugal pré-reforma ortográfica** (Acordo Ortográfico de 1990 não aplicado)
+- Usar termos portugueses: "ficheiro" (não "arquivo"), "pasta" (não "diretório" em contexto UI), "descarregar" (não "baixar")
+- Formatação de números: usar `toLocaleString("pt-PT")` para separadores e formatação
+- Datas: formato DD/MM/AAAA quando apresentadas em texto
+
+## Arquitectura
+- **100% client-side**: Tudo processado localmente no browser, zero uploads para servidores
+- **Privacidade by design**: Nenhum dado sai do dispositivo do utilizador
+- **Vanilla JavaScript**: Sem frameworks pesados, usar ES modules quando necessário
+- **Acessibilidade**: Suportar navegação por teclado, ARIA labels, screen readers
+
+## Estrutura de Ficheiros
+```
+/
+├── index.html          # Landing page
+├── app/
+│   ├── app.html        # Aplicação principal
+│   ├── app.js          # Lógica da aplicação
+│   └── styles.css      # Estilos da aplicação
+└── assets/
+    ├── css/            # Estilos globais
+    └── js/             # Scripts auxiliares
+```
+
+## Convenções de Código
+- **Variáveis**: camelCase
+- **Constantes**: UPPER_SNAKE_CASE
+- **Funções**: camelCase, verbos descritivos (ex: `getFolderForFile`, `formatBytes`)
+- **Comentários**: Em português, explicar o "porquê" quando necessário
+- **Nomes de ficheiros**: kebab-case
+
+## UI/UX
+- **Dark theme** como padrão
+- **Feedback visual** imediato para todas as acções
+- **Loading states** para operações que demoram (ex: carregar milhares de ficheiros)
+- **Mensagens de erro** claras e acionáveis
+- **Responsive design**: Funcionar bem em desktop e mobile
+
+## Funcionalidades Principais
+1. **Organização de ficheiros**: Por tipo, data, tamanho, etc.
+2. **Renomeação inteligente**: Múltiplos formatos de data e padrões
+3. **Suporte a pastas**: Ler recursivamente estruturas de diretórios
+4. **Geração de ZIP**: Tudo processado localmente com JSZip
+
+## Testes
+- Testar com lotes grandes (milhares de ficheiros)
+- Validar drag & drop e seleção manual
+- Verificar compatibilidade cross-browser (Chrome, Firefox, Edge)
+
